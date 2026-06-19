@@ -13,7 +13,15 @@ export default defineConfig({
     allowedHosts: true,
   },
   build: {
-    rollupOptions: {},
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
+          'vendor-ui': ['lucide-react', 'motion', 'recharts'],
+        },
+      },
+    },
   },
   experimental: {
     enableNativePlugin: false,
