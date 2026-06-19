@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /blog
+Allow: /blog/category/
+Allow: /blog/*
+Allow: /news
+Allow: /news/*
+Allow: /emissions
+Allow: /live
+Allow: /about
+Allow: /contact
+
+# Block private and action-oriented paths for clean SEO indexing
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /dashboard
+Disallow: /admin-dashboard
+
+Sitemap: https://radiotelevisionsismique.com/sitemap.xml
