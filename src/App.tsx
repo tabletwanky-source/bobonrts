@@ -27,6 +27,7 @@ import Programmes from './pages/Programmes';
 import EspaceCitoyen from './pages/EspaceCitoyen';
 import Sports from './pages/Sports';
 import SportsDiagnostics from './pages/SportsDiagnostics';
+import SystemStatus from './pages/SystemStatus';
 import BreakingNewsTicker from './components/BreakingNewsTicker';
 import { Page } from './types';
 import { updateSportsConfig } from './config/sportsConfig';
@@ -94,6 +95,8 @@ const App: React.FC = () => {
         setCurrentPage(Page.EspaceCitoyen);
       } else if (path === '/sports-diagnostics' || path === '/sports-diagnostics/') {
         setCurrentPage(Page.SportsDiagnostics);
+      } else if (path === '/system-status' || path === '/system-status/') {
+        setCurrentPage(Page.SystemStatus);
       } else if (path.startsWith('/sports')) {
         setCurrentPage(Page.Sports);
       }
@@ -129,6 +132,8 @@ const App: React.FC = () => {
       targetPath = '/espace-citoyen';
     } else if (currentPage === Page.SportsDiagnostics) {
       targetPath = '/sports-diagnostics';
+    } else if (currentPage === Page.SystemStatus) {
+      targetPath = '/system-status';
     } else if (currentPage === Page.Sports) {
       if (!window.location.pathname.startsWith('/sports')) {
         targetPath = '/sports';
@@ -232,6 +237,8 @@ const App: React.FC = () => {
         return <Sports />;
       case Page.SportsDiagnostics:
         return <SportsDiagnostics />;
+      case Page.SystemStatus:
+        return <SystemStatus />;
       default:
         return <Home setCurrentPage={setCurrentPage} onSelectNews={handleSelectNews} />;
     }

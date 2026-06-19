@@ -42,7 +42,8 @@ export enum Page {
   Programmes = 'programmes',
   EspaceCitoyen = 'espace-citoyen',
   Sports = 'sports',
-  SportsDiagnostics = 'sports-diagnostics'
+  SportsDiagnostics = 'sports-diagnostics',
+  SystemStatus = 'system-status'
 }
 
 export interface UserProfile {

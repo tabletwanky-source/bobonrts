@@ -3,13 +3,15 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+const env = (import.meta as any).env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBEEPqFdChE5w3hFAd-sjXXm8e0h3wfZ78",
-  authDomain: "teacher-wanky-website.firebaseapp.com",
-  projectId: "teacher-wanky-website",
-  storageBucket: "teacher-wanky-website.firebasestorage.app",
-  messagingSenderId: "530825704678",
-  appId: "1:530825704678:web:bc54aa702e2c1b9058b727"
+  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyBEEPqFdChE5w3hFAd-sjXXm8e0h3wfZ78",
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "teacher-wanky-website.firebaseapp.com",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || "teacher-wanky-website",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "teacher-wanky-website.firebasestorage.app",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "530825704678",
+  appId: env.VITE_FIREBASE_APP_ID || "1:530825704678:web:bc54aa702e2c1b9058b727",
 };
 
 // Initialize Firebase safely
