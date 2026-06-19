@@ -1,0 +1,214 @@
+{
+  "collections": {
+    "users": {
+      "description": "Stores user and admin account data with tracking properties",
+      "schema": {
+        "uid": "string",
+        "fullName": "string",
+        "email": "string",
+        "role": "string",
+        "createdAt": "timestamp",
+        "lastLogin": "timestamp",
+        "totalListeningTime": "number",
+        "listeningTime": "number",
+        "points": "number",
+        "avatar": "string",
+        "photoURL": "string",
+        "status": "string"
+      }
+    },
+    "articles": {
+      "description": "Stores radio media outlet news and blog posts managed by administrators",
+      "schema": {
+        "title": "string",
+        "slug": "string",
+        "content": "string",
+        "excerpt": "string",
+        "featuredImage": "string",
+        "category": "string",
+        "author": "string",
+        "published": "boolean",
+        "views": "number",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "categories": {
+      "description": "Stores categories grouping articles",
+      "schema": {
+        "name": "string",
+        "description": "string",
+        "createdAt": "timestamp"
+      }
+    },
+    "listening_sessions": {
+      "description": "Tracks listener listening durations accurately",
+      "schema": {
+        "userId": "string",
+        "startTime": "timestamp",
+        "endTime": "timestamp",
+        "duration": "number",
+        "pointsEarned": "number",
+        "date": "string"
+      }
+    },
+    "reward_points": {
+      "description": "Track aggregate total loyalty points earned by listener",
+      "schema": {
+        "userId": "string",
+        "totalPoints": "number",
+        "lifetimePoints": "number",
+        "lastUpdated": "timestamp"
+      }
+    },
+    "reward_requests": {
+      "description": "Log and process claims for $5 rewards from listeners",
+      "schema": {
+        "userId": "string",
+        "userEmail": "string",
+        "userName": "string",
+        "pointsSpent": "number",
+        "amountUSD": "number",
+        "status": "string",
+        "createdAt": "timestamp",
+        "processedAt": "timestamp"
+      }
+    },
+    "settings": {
+      "description": "Stores general app configurations (e.g. welcome announcement properties and stats)",
+      "schema": {
+        "title": "string",
+        "content": "string",
+        "imageUrl": "string",
+        "enabled": "boolean",
+        "autoCloseDuration": "number",
+        "views": "number",
+        "dismissals": "number",
+        "updatedAt": "timestamp"
+      }
+    },
+    "sponsors": {
+      "description": "Stores sponsor advertisements managed by administrators",
+      "schema": {
+        "id": "string",
+        "name": "string",
+        "imageUrl": "string",
+        "description": "string",
+        "websiteUrl": "string",
+        "mapsUrl": "string",
+        "isActive": "boolean",
+        "displayOrder": "number",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "programs": {
+      "description": "Stores program schedules managed by administrators",
+      "schema": {
+        "title": "string",
+        "description": "string",
+        "imageUrl": "string",
+        "hostName": "string",
+        "dayOfWeek": "number",
+        "startTime": "string",
+        "endTime": "string",
+        "category": "string",
+        "isActive": "boolean",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "breaking_news": {
+      "description": "Stores breaking news alerts managed by administrators",
+      "schema": {
+        "title": "string",
+        "message": "string",
+        "link": "string",
+        "priority": "string",
+        "isActive": "boolean",
+        "isPinned": "boolean",
+        "createdAt": "timestamp",
+        "expiresAt": "timestamp"
+      }
+    },
+    "citizen_reports": {
+      "description": "Stores community journalism reports submitted by users and moderated by admins",
+      "schema": {
+        "fullName": "string",
+        "email": "string",
+        "phone": "string",
+        "title": "string",
+        "description": "string",
+        "category": "string",
+        "location": "string",
+        "mediaUrls": "array",
+        "supportingFilesUrls": "array",
+        "status": "string",
+        "userId": "string",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "fhf_news": {
+      "description": "Fédération Haïtienne de Football official and national team news stories",
+      "schema": {
+        "title": "string",
+        "content": "string",
+        "excerpt": "string",
+        "category": "string",
+        "featuredImage": "string",
+        "publishedAt": "timestamp",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "fhf_leadership": {
+      "description": "Fédération Haïtienne de Football current board members and administrators",
+      "schema": {
+        "name": "string",
+        "role": "string",
+        "biography": "string",
+        "photoUrl": "string",
+        "momentsKeys": "array",
+        "displayOrder": "number",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "fhf_timeline": {
+      "description": "Fédération Haïtienne de Football history milestones timeline",
+      "schema": {
+        "year": "string",
+        "title": "string",
+        "type": "string",
+        "description": "string",
+        "displayOrder": "number",
+        "createdAt": "timestamp"
+      }
+    },
+    "fhf_legends": {
+      "description": "Haitian legendary football players and figures profiles",
+      "schema": {
+        "name": "string",
+        "photoUrl": "string",
+        "biography": "string",
+        "statistics": "string",
+        "videoUrl": "string",
+        "story": "string",
+        "displayOrder": "number",
+        "createdAt": "timestamp",
+        "updatedAt": "timestamp"
+      }
+    },
+    "fhf_media": {
+      "description": "Fédération Haïtienne de Football gallery items (photos/videos/highlights)",
+      "schema": {
+        "title": "string",
+        "type": "string",
+        "url": "string",
+        "thumbnailUrl": "string",
+        "createdAt": "timestamp"
+      }
+    }
+  }
+}

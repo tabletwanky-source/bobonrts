@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr-HT">
+  <head>
+    <!-- Safeguard window.fetch against read-only getter TypeError in sandbox/iframe configurations -->
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          if (originalFetch) {
+            var currentFetch = originalFetch;
+            Object.defineProperty(window, 'fetch', {
+              get: function() { return currentFetch; },
+              set: function(val) { currentFetch = val; },
+              configurable: true,
+              enumerable: true
+            });
+          }
+        } catch (e) {
+          console.warn("Failed to safeguard window.fetch:", e);
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Metadata -->
+    <title>Radio Télévision Sismique | Radio en Direct, Actualités et Émissions</title>
+    <meta name="description" content="Écoutez Radio Télévision Sismique en direct. Actualités, culture, sport, politique, émissions spéciales et informations en temps réel depuis Haïti et partout dans le monde." />
+    <meta name="keywords" content="radio haiti, radio télévision sismique, radio en direct, radio haiti live, actualités haiti, radio fm haiti, émissions radio, podcast haiti, musique haiti, radio online" />
+    <meta name="author" content="Radio Télévision Sismique" />
+
+    <!-- Performance SEO: Preloads and DNS Prefetches -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://i.postimg.cc" />
+    <link rel="preload" as="image" href="https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png" fetchpriority="high" />
+
+    <!-- Google Search Console & Bing Webmaster Verification Placeholders -->
+    <meta name="google-site-verification" content="GSC_VERIFICATION_CODE_PLACEHOLDER" />
+    <meta name="msvalidate.01" content="BING_VERIFICATION_CODE_PLACEHOLDER" />
+
+    <!-- Local SEO: Lang and hreflang Alternate Tags -->
+    <link rel="alternate" hreflang="fr-HT" href="https://radiotelevisionsismique.com" />
+    <link rel="alternate" hreflang="ht-HT" href="https://radiotelevisionsismique.com" />
+    <link rel="alternate" hreflang="x-default" href="https://radiotelevisionsismique.com" />
+
+    <!-- Favicon and App Link Specifications -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- PWA Mobile Web App Metadata -->
+    <meta name="theme-color" content="#f97316" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Télé Sismique" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph Tags (Facebook, WhatsApp, Telegram, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Radio Télévision Sismique | Radio en Direct, Actualités et Émissions" />
+    <meta property="og:description" content="Écoutez Radio Télévision Sismique en direct. Actualités, culture, sport, politique, émissions spéciales et informations en temps réel depuis Haïti et partout dans le monde." />
+    <meta property="og:image" content="https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png" />
+    <meta property="og:url" content="https://radiotelevisionsismique.com" />
+    <meta property="og:site_name" content="Radio Télévision Sismique" />
+
+    <!-- Twitter/X Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Radio Télévision Sismique | Radio en Direct, Actualités et Émissions" />
+    <meta name="twitter:description" content="Écoutez Radio Télévision Sismique en direct. Actualités, culture, sport, politique, émissions spéciales et informations en temps réel depuis Haïti et partout dans le monde." />
+    <meta name="twitter:image" content="https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png" />
+
+    <!-- Comprehensive JSON-LD Structured Data Schema.org Graph -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "NewsMediaOrganization",
+            "@id": "https://radiotelevisionsismique.com/#organization",
+            "name": "Radio Télévision Sismique",
+            "url": "https://radiotelevisionsismique.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png",
+              "width": "1000",
+              "height": "1000"
+            },
+            "sameAs": [
+              "https://www.facebook.com/radiotelevisionsismique",
+              "https://twitter.com/radiosismique"
+            ],
+            "description": "Radio Télévision Sismique, l'un des plus grands réseaux de diffusion en Haïti et à l'international.",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer service",
+              "areaServed": "HT",
+              "availableLanguage": [
+                "French",
+                "Haitian Creole"
+              ]
+            }
+          },
+          {
+            "@type": "RadioStation",
+            "@id": "https://radiotelevisionsismique.com/#radiostation",
+            "name": "Radio Télévision Sismique",
+            "url": "https://radiotelevisionsismique.com/",
+            "logo": "https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png",
+            "parentOrganization": {
+              "@id": "https://radiotelevisionsismique.com/#organization"
+            }
+          },
+          {
+            "@type": "BroadcastService",
+            "@id": "https://radiotelevisionsismique.com/#broadcastservice",
+            "name": "Radio Télévision Sismique Live Stream",
+            "broadcaster": {
+              "@id": "https://radiotelevisionsismique.com/#radiostation"
+            },
+            "parentService": {
+              "@id": "https://radiotelevisionsismique.com/#radiostation"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Haiti"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://radiotelevisionsismique.com/#website",
+            "url": "https://radiotelevisionsismique.com/",
+            "name": "Radio Télévision Sismique",
+            "description": "Radio en Direct, Actualités et Émissions en Haïti et dans le monde entier.",
+            "publisher": {
+              "@id": "https://radiotelevisionsismique.com/#organization"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://radiotelevisionsismique.com/blog?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

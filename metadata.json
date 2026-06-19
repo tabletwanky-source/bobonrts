@@ -1,0 +1,6 @@
+{
+  "name": "Radio Télévision Sismique",
+  "description": "The online portal for Radio Télévision Sismique, featuring live streaming, news broadcasts, blogs, and an administrative dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

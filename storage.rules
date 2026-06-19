@@ -1,0 +1,41 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Check if the user is an admin
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'renejohnmike33@gmail.com' ||
+        request.auth.token.email == 'thefunniest2020@gmail.com' ||
+        request.auth.token.email == 'wanky7713@gmail.com' ||
+        request.auth.token.email == 'Wanky7713@gmail.com'
+      );
+    }
+
+    // Citizen reports storage uploads validation
+    match /citizen_reports/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAuthenticated() && (
+        request.resource == null || (
+          request.resource.contentType.matches('image/jpeg') ||
+          request.resource.contentType.matches('image/png') ||
+          request.resource.contentType.matches('image/webp') ||
+          request.resource.contentType.matches('video/mp4') ||
+          request.resource.contentType.matches('video/quicktime') || // mov
+          request.resource.contentType.matches('video/webm')
+        )
+      );
+    }
+
+    // Default rules for other media storage folders
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

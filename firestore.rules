@@ -1,0 +1,180 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper to verify authentication
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper to check if email is verified
+    function isEmailVerified() {
+      return isAuthenticated() && request.auth.token.email_verified == true;
+    }
+
+    // Helper to check if the user is the owner of the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ID Poisoning validation helper for alphanumeric codes & IDs
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Helper to check for admin privileges (emails or explicit Firestore profile roles)
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'renejohnmike33@gmail.com' ||
+        request.auth.token.email == 'thefunniest2020@gmail.com' ||
+        request.auth.token.email == 'wanky7713@gmail.com' ||
+        request.auth.token.email == 'Wanky7713@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    // User profile rules
+    match /users/{userId} {
+      allow get: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin()) && (
+        isAdmin() || (
+          // Disallow regular users from manually elevating their role
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role'])
+        )
+      );
+      allow delete: if isAdmin();
+    }
+    
+    // News articles rules
+    match /articles/{articleId} {
+      allow read: if true; 
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Article categories rules
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Listening Sessions rules
+    match /listening_sessions/{sessionId} {
+      // Allow read/get/list if user owns the record or is admin
+      allow get, list: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || isAdmin());
+      allow update: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+    
+    // Settings collection rules
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views', 'dismissals']));
+    }
+
+    // Reward Requests tracking rules
+    match /reward_requests/{requestId} {
+      allow get, list: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // Reward Loyalty Points aggregation rules
+    match /reward_points/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create, update: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Leaderboards rules (Read is public, writing is admin-only)
+    match /leaderboards/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /weekly_rankings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /monthly_rankings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Achievements unlocks rules
+    match /achievements/{id} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+    
+    // Badges rules
+    match /listener_badges/{id} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Sponsors ads rules
+    match /sponsors/{sponsorId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Broadcast Program standard paths rules (cover redundant paths for utmost safety in tests)
+    match /programs/{programId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /programmes/{programId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Breaking news alerts rules
+    match /breaking_news/{alertId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Citizen reports journalism submission rules
+    match /citizen_reports/{reportId} {
+      // Public & authenticated creators are allowed to create reports
+      allow create: if true;
+      // Registered users can query and track their own reports, admins can read everything
+      allow get, list: if (isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.email == request.auth.token.email)) || isAdmin();
+      // Only admins can moderate, update or delete reports
+      allow update, delete: if isAdmin();
+    }
+
+    // Haiti Football Federation (FHF) collections
+    match /fhf_news/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /fhf_leadership/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /fhf_timeline/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /fhf_legends/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /fhf_media/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

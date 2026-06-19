@@ -1,0 +1,28 @@
+{
+  "name": "Radio Télévision Sismique",
+  "short_name": "RTS",
+  "description": "Radio Télévision Sismique, en direct depuis Haïti. Émissions spéciales, actualités nationales et internationales.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#f97316",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/2b5F4Qvk/logosiste-(1).png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
